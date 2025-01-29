@@ -14,13 +14,13 @@ canvas {
 #valentinesButton {
     display: none;
     position: absolute;
-    background-color: #2d2dff;
-    border: 2px solid #2d2dff;
+    background-color: #FF007F;
+    border: 2px solid #FF007F;
     color: #fff;
     cursor: pointer;
     height: 50px;
     font-size: 16px;
-    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-family: "Montserrat", sans-serif;
     border-radius: 10px;
     top: calc(50% + 150px); /* Adjust based on canvas height and text position */
     left: 50%;
@@ -29,6 +29,6 @@ canvas {
   }
 
   #valentinesButton:hover {
-    background-color: #1f1faa;
+    background-color: #FF007F;
     color: #eee;
 }
