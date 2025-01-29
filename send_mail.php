@@ -1,34 +1,18 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
 require 'vendor/autoload.php';
 
-$mail = new PHPMailer(true);
+$resend = Resend::client('re_XXXXXXXX'); // Remplace avec ta clé API Resend
 
 try {
-    //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-    $mail->isSMTP();
-    $mail->Host       = 'smtp.gmail.com';                       //gmail SMTP server set to send through
-    $mail->SMTPAuth   = true;
-    $mail->Username   = 'user@example.com';                     //SMTP username (your gmail account)
-    $mail->Password   = 'secret';                               //SMTP password (your gmail password or app password)
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-    $mail->Port       = 465;
+    $result = $resend->emails->send([
+        'from' => 'batman@willubemyvalentine.love', // Doit être un domaine vérifié sur Resend
+        'to' => ['jonathanbg7@gmail.com'],
+        'subject' => 'Je t\'aime ❤',
+        'html' => '<p>Joyeuse Saint-Valentin mon amour. Je t\'aime tellement. Tu es la plus belle chose qui me soit arrivée ❤</p>'
+    ]);
 
-    //Recipients
-    $mail->setFrom('from@example.com', 'Mailer');         //Set the sender of the message (your email address)
-    $mail->addAddress('joe@example.net', 'Joe User');     //Add a recipient (your bae's email address)
-
-    //Content
-    $mail->isHTML(true);
-    $mail->Subject = 'I Love You';
-    $mail->Body    = 'Happy Valentine Day My Love. I love you so much. You are the best thing that has ever happened to me ❤';
-
-    $mail->send();
-    echo 'Message has been sent';
+    echo json_encode(['success' => true]);
 } catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    http_response_code(500);
+    echo json_encode(['error' => $e->getMessage()]);
 }
