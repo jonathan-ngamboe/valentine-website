@@ -51,24 +51,29 @@ function updateStars() {
 const button = document.getElementById("valentinesButton");
 
 button.addEventListener("click", () => {
-  if (button.textContent === "Clique ici! ❤") {
-    button.textContent = "Envoi en cours...";
-    fetch('send_mail.php')
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          button.textContent = "Vérifie tes emails 🙃";
-        } else {
-          console.error('Erreur:', data.error);
-          button.textContent = "Erreur 😞";
+    if (button.textContent === "Clique ici! ❤") {
+      button.textContent = "Envoi en cours...";
+      fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         }
       })
-      .catch(error => {
-        console.error('Erreur:', error);
-        button.textContent = "Erreur 😞";
-      });
-  }
-});
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            button.textContent = "Vérifie tes emails 🙃";
+          } else {
+            console.error('Erreur:', data.error);
+            button.textContent = "Erreur 😞";
+          }
+        })
+        .catch(error => {
+          console.error('Erreur:', error);
+          button.textContent = "Erreur 😞";
+        });
+    }
+  });
 
 function drawTextWithLineBreaks(lines, x, y, fontSize, lineHeight) {
     lines.forEach((line, index) => {
