@@ -1,0 +1,15 @@
+{
+  "name": "valentine-website",
+  "version": "1.0.0",
+  "description": "A valentine website for your bae. <br>\r This project gives you a template to use and edit for your valentine website instead of building one from scratch <br>",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "resend": "^4.1.1"
+  }
+}
