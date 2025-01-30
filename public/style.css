@@ -31,10 +31,9 @@ canvas {
   padding: 0 20px;
 }
 
-@media (max-width: 600px) {
-  #restartButton {
-      margin-top: 20px; 
-  }
+#restartButton.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 #restartButton:hover {
