@@ -75,7 +75,7 @@ button.addEventListener("click", async () => {
     button.classList.remove("visible");
     setTimeout(() => {
       button.style.display = "none";
-    }, 500); 
+    }, 500);
   } catch (error) {
     console.error("Erreur lors du redémarrage:", error);
     button.textContent = "Erreur 😞";
@@ -105,7 +105,7 @@ function splitText(text, maxWidth, context) {
 }
 
 function drawTextWithLineBreaks(text, x, y, fontSize, lineHeight) {
-  const margin = 40; 
+  const margin = 40;
   const maxWidth = window.innerWidth - margin * 2;
   const lines =
     window.innerWidth < 600 ? splitText(text, maxWidth, context) : [text];
@@ -179,7 +179,13 @@ function drawText(elapsedTime) {
 
   const texts = [
     {
-      text: "Georgia",
+      text: "♪ ♪ ♪",
+      start: timeToMs("00:00.00"),
+      end: timeToMs("00:09.20"),
+      yPosition: canvas.height / 2,
+    },
+    {
+      text: "Eulalie",
       start: timeToMs("00:09.20"),
       end: timeToMs("00:12.33"),
       yPosition: canvas.height / 2,
@@ -239,7 +245,7 @@ function drawText(elapsedTime) {
       yPosition: canvas.height / 2,
     },
     {
-      text: "Georgia",
+      text: "Eulalie",
       start: timeToMs("01:09.47"),
       end: timeToMs("01:12.56"),
       yPosition: canvas.height / 2,
@@ -293,6 +299,12 @@ function drawText(elapsedTime) {
       yPosition: canvas.height / 2,
     },
     {
+      text: "♪ ♪ ♪",
+      start: timeToMs("02:07.86"),
+      end: timeToMs("02:22.83"),
+      yPosition: canvas.height / 2,
+    },
+    {
       text: "I would never fall in love again until I found her",
       start: timeToMs("02:22.83"),
       end: timeToMs("02:30.34"),
@@ -315,9 +327,17 @@ function drawText(elapsedTime) {
       start: timeToMs("02:45.80"),
       end: timeToMs("03:00.00"),
       yPosition: basePosition + verticalSpacing,
+    },
+    {
+      text: "Joyeuse Saint-Valentin ma princesse ❤️",
+      start: timeToMs("03:00.00"),
+      end: timeToMs("99:99.99"),
+      yPosition: canvas.height / 2,
       callback: () => {
         const button = document.getElementById("restartButton");
         if (button) {
+          const lastTextY = canvas.height / 2; 
+          button.style.top = `${lastTextY + 60}px`; 
           button.style.display = "block";
           setTimeout(() => {
             button.classList.add("visible");
@@ -329,7 +349,7 @@ function drawText(elapsedTime) {
 
   texts.forEach(({ text, start, end, callback, yPosition }) => {
     const duration = end - start;
-    if (callback && elapsedTime >= end && !callbackExecuted) {
+    if (callback && elapsedTime >= start && !callbackExecuted) {
       callback();
       callbackExecuted = true;
     }
@@ -392,19 +412,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
   startButton.addEventListener("click", async () => {
     try {
+      const transitionOverlay = document.getElementById("transition-overlay");
+
+      transitionOverlay.classList.add("active");
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      welcomeScreen.style.display = "none";
+
       await music.play();
-      frameNumber = 0; 
+      frameNumber = 0;
 
-      welcomeScreen.style.transition = "opacity 2s ease-out";
-      welcomeScreen.style.opacity = "0";
-
-      starfield.style.transition = "opacity 2s ease-in";
       starfield.style.opacity = "1";
 
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      transitionOverlay.classList.remove("active");
+
       setTimeout(() => {
-        welcomeScreen.style.display = "none";
         animationStarted = true;
-      }, 4000);
+        transitionOverlay.style.display = "none";
+      }, 1000);
     } catch (error) {
       console.error("Erreur lecture musique:", error);
     }
