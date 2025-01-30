@@ -1,34 +1,206 @@
-html, body {
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: hidden;
-    cursor: url('./images/pointer.png'), auto;
+html,
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+  cursor: url("./images/pointer.png"), auto;
 }
 
 canvas {
-    width: 100%;
-    height: auto;
-    background: #111;
+  width: 100%;
+  height: auto;
+  background: #111;
 }
 
-#valentinesButton {
-    display: none;
-    position: absolute;
-    background-color: #FF007F;
-    border: 2px solid #FF007F;
-    color: #fff;
-    cursor: pointer;
-    height: 50px;
-    font-size: 16px;
-    font-family: "Montserrat", sans-serif;
-    border-radius: 10px;
-    top: calc(50% + 150px); /* Adjust based on canvas height and text position */
-    left: 50%;
-    transform: translateX(-50%);
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-  }
+#restartButton {
+  display: none;
+  position: absolute;
+  background-color: #ff007f;
+  border: 2px solid #ff007f;
+  color: #fff;
+  cursor: pointer;
+  height: 50px;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  border-radius: 10px;
+  top: calc(50% + 150px);
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+  padding: 0 20px;
+}
 
-  #valentinesButton:hover {
-    background-color: #FF007F;
-    color: #eee;
+#restartButton.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#restartButton:hover {
+  background-color: #ff007f;
+  color: #eee;
+}
+
+.welcome-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.letter {
+  background: #f4e4bc;
+  padding: clamp(20px, 5vw, 40px);
+  width: min(90%, 500px);
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  transform: rotate(-1deg);
+}
+
+.wax-seal {
+  position: absolute;
+  right: clamp(20px, 5vw, 40px);
+  bottom: clamp(20px, 5vw, 40px);
+  width: clamp(60px, 15vw, 80px);
+  height: clamp(60px, 15vw, 80px);
+  background: radial-gradient(circle at 40% 40%, #d42a2a 0%, #8b0000 70%);
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Cinzel", serif;
+  color: #f4e4bc;
+  font-size: clamp(24px, 6vw, 30px);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.wax-seal::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.wax-seal::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: repeating-radial-gradient(
+    circle at 50% 50%,
+    transparent 0,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 3px,
+    transparent 4px
+  );
+  opacity: 0.5;
+}
+
+.seal-letter {
+  position: relative;
+  z-index: 2;
+}
+
+.seal-texture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+      circle at 30% 20%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 20%
+    ),
+    radial-gradient(circle at 40% 60%, rgba(0, 0, 0, 0.1) 0%, transparent 30%),
+    radial-gradient(circle at 60% 40%, rgba(0, 0, 0, 0.1) 0%, transparent 30%);
+  filter: url(#texture);
+}
+
+.medieval-title {
+  font-family: "Cinzel", serif;
+  font-size: clamp(1.5em, 5vw, 2em);
+  color: #4a4a4a;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.medieval-text {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.1em, 4vw, 1.3em);
+  color: #4a4a4a;
+  text-align: center;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+#startButton {
+  display: block;
+  margin: 20px auto;
+  background: transparent;
+  border: 2px solid #8b0000;
+  color: #8b0000;
+  padding: clamp(8px, 2vw, 10px) clamp(20px, 4vw, 30px);
+  font-family: "Cinzel", serif;
+  font-size: clamp(0.9em, 3vw, 1.1em);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#startButton:hover {
+  background: #8b0000;
+  color: #f4e4bc;
+}
+
+/* Nouvel indicateur de volume */
+.volume-indicator {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #8b0000;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.8;
+  animation: pulse 2s infinite;
+}
+
+.volume-text {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
 }
