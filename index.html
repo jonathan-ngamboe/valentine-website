@@ -1,20 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="Joyeuse Saint-Valentin mon amour ❤">
-    <meta property="og:description" content="Un message spécial pour la Saint-Valentin">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://willubemyvalentine.love/public/images/favicon.png">
-    <link rel="icon" href="public/images/favicon.png" type="image/x-icon" />  
-    <title>Joyeuse Saint-Valentin mon amour ❤</title>
-    <link rel="stylesheet" href="public/style.css">
+    <meta name="robots" content="noindex, nofollow" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:title" content="Joyeuse Saint-Valentin ma princesse ❤" />
+    <meta
+      property="og:description"
+      content="Un message spécial pour la Saint-Valentin"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://willubemyvalentine.love/public/images/favicon.png"
+    />
+    <link rel="icon" href="public/images/favicon.png" type="image/x-icon" />
+    <title>Joyeuse Saint-Valentin ma princesse ❤</title>
+    <link rel="stylesheet" href="public/style.css" />
   </head>
   <body>
     <canvas id="starfield"></canvas>
-    <button id="valentinesButton">Clique ici! ❤</button>
+    <svg style="position: absolute; width: 0; height: 0">
+      <filter id="texture">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.8"
+          numOctaves="4"
+          result="noise"
+        />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" />
+      </filter>
+    </svg>
+
+    <div id="welcome-screen" class="welcome-overlay">
+      <div class="letter">
+        <div class="volume-indicator">
+          <i class="fas fa-volume-up"></i>
+        </div>
+        <h1 class="medieval-title">Pour Mme Eulalie Ngamboe</h1>
+        <p class="medieval-text">Une lettre vous attend...</p>
+        <button id="startButton">
+          <span class="button-text">Ouvrir</span>
+        </button>
+        <div class="wax-seal">
+          <div class="seal-texture"></div>
+          <span class="seal-letter">J</span>
+        </div>
+      </div>
+    </div>
+
+    <button id="restartButton">Recommencer ❤</button>
+    <audio id="backgroundMusic" autoplay preload="auto">
+      <source src="public/music/Until-I-Found-You.mp3" type="audio/mpeg" />
+    </audio>
     <script src="script.js"></script>
   </body>
 </html>
